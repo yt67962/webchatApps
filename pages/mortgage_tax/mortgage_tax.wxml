@@ -1,0 +1,51 @@
+<!--pages/mortgage.wxml-->
+<view>
+  <view class='row'>
+    <text class='info'>房屋面积</text>
+    <input class="input" type="digit" bindinput="getInput" value="{{input.size}}" data-field="size" />
+  </view>
+  <view class='row'>
+    <text class='info'>卖家买入价格</text>
+    <input type="digit" bindinput="getInput" value="{{input.buyPrice}}" data-field="buyPrice"></input>
+  </view>
+  <view class='row'>
+    <text class='info'>卖家卖出价格</text>
+    <input type="digit" bindinput="getInput" value="{{input.sellPrice}}" data-field="sellPrice"></input>
+  </view>
+  <view class='row'>
+    <text class='info'>年限</text>
+    <radio-group class="radio-group" bindchange="onYearsChange">
+      <block wx:for="{{yearsList}}" wx:key="value">
+        <radio value="{{item.value}}" checked="{{item.checked}}" />{{item.display}}
+      </block>
+    </radio-group>
+  </view>
+  <view class='row'>
+    <text class='info'>是否首套房</text>
+    <switch bindchange="getInput" checked="{{input.isFirstBuy}}" data-field="isFirstBuy" />
+  </view>
+  <view class='row'>
+    <text class='info'>是否唯一</text>
+    <switch bindchange="getInput" checked="{{input.isOnlyHouse}}" data-field="isOnlyHouse" />
+  </view>
+  <view class='row'>
+    <text class='info'>是否普通住宅</text>
+    <switch bindchange="getInput" checked="{{input.isNormalHouse}}" data-field="isNormalHouse" />
+  </view>
+  <view class='group' wx:if="{{result!=null}}">
+    <text class='info'>卖方税费</text>
+    <view class="row" wx:for="{{result.taxForSellSide}}" wx:key="{{result.taxForSellSide!=null}}">
+      <text style="width:30%">{{item.display}}</text>
+      <text style="width:30%">{{item.value}}</text>
+      <text style="width:40%">{{item.payTo}}</text>
+    </view>
+  </view>
+  <view class='group' wx:if="{{result!=null}}">
+    <text class='info'>买方税费</text>
+    <view class="row" wx:for="{{result.taxForBuySide}}" wx:key="{{result.taxForBuySide!=null}}">
+      <text style="width:30%">{{item.display}}</text>
+      <text style="width:30%">{{item.value}}</text>
+      <text style="width:40%">{{item.payTo}}</text>
+    </view>
+  </view>
+</view>
